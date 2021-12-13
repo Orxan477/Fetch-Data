@@ -1,50 +1,38 @@
-async function getAllPosts(){
-    let data =await fetch("https://jsonplaceholder.typicode.com/posts");
-    let posts=await data.json();
-    [...posts].forEach(el => {
-        let card= ` <div class="col-3">   
-                        <div class="card">
-                            <p class="card-text"> Data Id: ${posts[0].userId}</p>
-                            <p class="card-text"> Id: ${posts[0].id}</p>
-                            <p class="card-text">${posts[0].title}</p>
-                            <p class="card-text">${posts[0].body}</p>
-                        </div>
-                    </div>`
-
-    info=document.querySelectorAll(".row");
-    [...info].forEach(element => {
-        element.innerHTML+=card;
-    });
-        });
-    }
-
-
-    // async function getAllUsers(){
-    //     let data =await fetch("https://jsonplaceholder.typicode.com/users");
-    //     let posts=await data.json();
-    //     [...idInfo].forEach(el => {
-    //         let card1= ` <div class="col-3">   
-    //                         <div class="card">
-    //                             <p class="card-text"> Data Id: ${posts[0].name}</p>
-    //                             <p class="card-text"> Id: ${posts[0].username}</p>
-    //                             <p class="card-text">${posts[0].email}</p>
-    //                         </div>
-    //                     </div>`
-    
-    //     info=document.querySelectorAll(".row");
-    //     [...info].forEach(element => {
-    //         element.innerHTML+=card1;
-    //     });
-    //         });
-    // }
+async function getAllUsers(){
+    let userdata= await fetch("https://jsonplaceholder.typicode.com/users");
+    let postUser= await userdata.json();
+    for (let i = 0; i < postUser.length; i++) {  
+        let card= 
+        ` <div class="col-3 mb-5">   
+            <div class="card">
+                <p class="card-text"> Username: ${postUser[i].name}</p>
+                <p class="card-text"> Username: ${postUser[i].username}</p>
+                <p class="card-text"> Email: ${postUser[i].email}</p>
+                <p class="card-text"> Email: ${postUser[i].phone}</p>
+                <p class="card-text"> Email: ${postUser[i].website}</p>
+                <button type="button" class="btn btn-primary user" id=${postUser[i].id}>Information</button>
+            </div>
+        </div>`
+info=document.querySelectorAll(".row");
+info.forEach(element => {
+element.innerHTML+=card;
+});
+}       
+    }   
 button=document.querySelector(".btn-primary");
 load= document.querySelector(".loader");
 
 button.addEventListener('click',function(ev){
-load.classList.remove("d-none");
+//   load.classList.remove("d-none");
 // ev.preventDefault();
- getAllPosts();
- getAllUsers();
-load.classList.add("d-none");
+  getAllUsers().then(res => {
+    load.classList.add("d-none");
+  });
 
 })
+
+
+
+
+// let data =await fetch("https://jsonplaceholder.typicode.com/posts");
+//     let posts=await data.json();
